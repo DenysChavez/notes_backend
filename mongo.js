@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-if (process.argv.length < 3) {
-  console.log("give password as argument");
-  process.exit(1);
-}
+// if (process.argv.length < 3) {
+//   console.log("give password as argument");
+//   process.exit(1);
+// }
 
-const password = process.argv[2];
+// const password = process.argv[2];
 
-const url = `mongodb+srv://dvchf26:${password}@notes.zzmg6t9.mongodb.net/?retryWrites=true&w=majority&appName=noteApp`;
+const url = process.env.MONGODB_URL
 
 mongoose.set("strictQuery", false);
 
@@ -16,6 +16,14 @@ mongoose.connect(url);
 const noteSchema = new mongoose.Schema({
   content: String,
   important: Boolean,
+});
+
+noteSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
 });
 
 const Note = mongoose.model("Note", noteSchema);
@@ -36,3 +44,4 @@ Note.find({}).then((result) => {
   });
   mongoose.connection.close();
 });
+
