@@ -1,8 +1,7 @@
-const express = require("express");
-require("dotenv").config();
+const express = require('express')
+require("dotenv").config()
 const cors = require("cors");
 const Note = require("./models/note");
-const note = require("./models/note");
 
 const app = express();
 
