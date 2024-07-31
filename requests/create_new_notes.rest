@@ -1,8 +1,8 @@
-PUT http://localhost:3001/api/notes/6685e1fff4f82b8cac5a1c59
+POST http://localhost:3001/api/notes/
 Content-Type: application/json
 
 {
-    "id": "6685e1fff4f82b8cac5a1c59",
-    "content": "lol",
-    "important": true
+    "content": "Browser can execute only Javascript",
+    "important": true,
+    "userId": "66aa842bc720c6b84351bc90"
 }
